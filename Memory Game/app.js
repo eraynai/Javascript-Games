@@ -37,6 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const grid = document.querySelector(".grid");
   var cardsChosen = [];
+  var cardsChosenId = [];
 
   //create the board
   function createBoard() {
@@ -50,10 +51,24 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   //check for matches
+  function checkForMatch() {
+    var cards = document.querySelectorAll("img");
+    const optionOneId = cardsChosenId[0];
+    const optionTwoId = cardsChosenId[1];
+    if (cardsChosen[0] === cardsChosen[1]) {
+      alert("You found a match!");
+    }
+  }
 
   //flip your card
   function flipCard() {
     var cardId = this.getAttribute("data-id");
+    cardsChosen.push(cardArray[cardId].name);
+    cardsChosendId.push(cardId);
+    this.setAttribute("src", cardArray[cardId].img);
+    if (cardsChosen === 2) {
+      setTimeout(checkForMatch, 500);
+    }
   }
 
   createBoard();
